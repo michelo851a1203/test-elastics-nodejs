@@ -2,10 +2,10 @@ import elasticSearch from '@elastic/elasticsearch'
 
 export const callElasticSearch = () => {
   // const node = 'https://dex.dev.net-zero.eco/api/es/';
-  const node = 'https://dex.dev.net-zero.eco/api/search';
+  const node = 'https://dex.es.dev.net-zero.eco/';
   // const node = 'http://localhost:9200';
   const client = new elasticSearch.Client({
-    node,
+    node
   });
 
   return client;
