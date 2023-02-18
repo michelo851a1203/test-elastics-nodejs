@@ -3,6 +3,7 @@ import {
   callElasticSearch, 
   searchElastic,
   searchElasticFilter,
+  searchElasticPagination,
  } from '.'
 
 describe('main', () => {
@@ -16,5 +17,11 @@ describe('main', () => {
     const client = callElasticSearch()
     const index = 'objects-carboncredit';
     await searchElasticFilter(index, client);
+  })
+
+  test('test elastic pagination', async () => {
+    const client = callElasticSearch()
+    const index = 'objects-carboncredit';
+    await searchElasticPagination(index, client)
   })
 })

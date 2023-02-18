@@ -43,3 +43,13 @@ export const searchElasticFilter = async (index: string,client: elasticSearch.Cl
   console.log('=====================');
 }
 
+export const searchElasticPagination = async (index: string,client: elasticSearch.Client) => {
+  const result = await client.search({
+    index,
+    from: 0,
+    size: 1,
+  })
+  console.log('===== filter ================');
+  console.log(result.hits.hits);
+  console.log('=====================');
+}
