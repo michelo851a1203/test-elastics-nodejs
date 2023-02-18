@@ -1,9 +1,8 @@
 import elasticSearch from '@elastic/elasticsearch'
 
 export const callElasticSearch = () => {
-  // const node = 'https://dex.dev.net-zero.eco/api/es/';
   const node = 'https://dex.es.dev.net-zero.eco/';
-  // const node = 'http://localhost:9200';
+  // const node = 'http://localhost:9200'
   const client = new elasticSearch.Client({
     node
   });
@@ -25,5 +24,22 @@ export const searchElastic = async (index: string,client: elasticSearch.Client) 
   const result = await client.search({
     index,
   })
-  console.log(result);
+  console.log('=====================');
+  console.log(result.hits.hits);
+  console.log('=====================');
 }
+
+export const searchElasticFilter = async (index: string,client: elasticSearch.Client) => {
+  const result = await client.search({
+    index,
+    query: {
+      match: {
+        quantity_issued: 4000,
+      }
+    }
+  })
+  console.log('===== filter ================');
+  console.log(result.hits.hits);
+  console.log('=====================');
+}
+
