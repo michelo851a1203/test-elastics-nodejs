@@ -53,3 +53,58 @@ export const searchElasticPagination = async (index: string,client: elasticSearc
   console.log(result.hits.hits);
   console.log('=====================');
 }
+
+export const fuzzySearchingElastic = async (index: string,client: elasticSearch.Client, name: string) => {
+  const result = await client.search({
+    index,
+    query: {
+      match: {
+        name: name.toLowerCase(),
+      }
+    }
+  })
+  console.log('===== filter ================');
+  console.log(result.hits.hits);
+  console.log('=====================');
+}
+
+export const accurateSearchElastic = async (index: string,client: elasticSearch.Client, name: string) => {
+  const result = await client.search({
+    index,
+    query: {
+      match_phrase: {
+        name,
+      }
+    }
+  })
+  console.log('===== filter ================');
+  console.log(result.hits.hits);
+  console.log('=====================');
+}
+
+export const combineSearchingElastic = async (
+  index: string,
+  client: elasticSearch.Client, 
+  name: string,
+  standard: string,
+  project_type: string,
+  country: string,
+) => {
+  const result = await client.search({
+    index,
+    query: {
+      bool: {
+        must: [
+          { match_phrase: { name } },
+          { term: { standard } },
+          { match_phrase: { project_type } },
+          { match_phrase: { country } },
+        ]
+      }
+    }
+  })
+  console.log('===== filter ================');
+  console.log(result.hits.hits);
+  console.log('=====================');
+  client.search
+}
