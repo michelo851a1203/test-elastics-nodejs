@@ -108,3 +108,32 @@ export const combineSearchingElastic = async (
   console.log('=====================');
   client.search
 }
+
+export const keySearch = async (
+  index: string,
+  client: elasticSearch.Client
+) => {
+  const result = await client.search({
+    index,
+    query: {
+      bool: {
+        must: [
+          { match_phrase: { name: 'init0' }},
+          { match_phrase: { 'owner.key_auths': 'ECO28gatQ9bhQb9KzHgwQXnkh4sc3mu669d8ECTKw7oxD84i5UEzEr' }},
+          { match_phrase: { 'active.key_auths': 'ECO28gatQ9bhQb9KzHgwQXnkh4sc3mu669d8ECTKw7oxD84i5UEzEr' }},
+          { match_phrase: { 'options.memo_key': 'ECO28gatQ9bhQb9KzHgwQXnkh4sc3mu669d8ECTKw7oxD84i5UEzEr' }},
+        ]
+      }
+    }
+  })
+  console.log('===== filter ================');
+  // console.log(result.hits.hits);
+  result.hits.hits.forEach(item => {
+    const jsonResult = JSON.stringify(item, undefined, 2)
+    console.log(jsonResult);
+  })
+
+  console.log('=====================');
+}
+
+

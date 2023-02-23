@@ -7,6 +7,7 @@ import {
   fuzzySearchingElastic,
   accurateSearchElastic,
   combineSearchingElastic,
+  keySearch,
  } from '.'
 
 describe('main', () => {
@@ -58,11 +59,11 @@ describe('main', () => {
   //   await fuzzySearchingElastic(index, client, 'cool')
   // })
 
-  test('test elastic accurate search account success', async () => {
-    const client = callElasticSearch()
-    const index = 'objects-account';
-    await accurateSearchElastic(index, client, 'temp-account')
-  })
+  // test('test elastic accurate search account success', async () => {
+  //   const client = callElasticSearch()
+  //   const index = 'objects-account';
+  //   await accurateSearchElastic(index, client, 'temp-account')
+  // })
 
   // test('test elastic accurate search partial must be fail', async () => {
   //   const client = callElasticSearch()
@@ -76,16 +77,22 @@ describe('main', () => {
   //   await accurateSearchElastic(index, client, 'cool')
   // })
 
-  test('combine search success', async () => {
+  // test('combine search success', async () => {
+  //   const client = callElasticSearch()
+  //   const index = 'objects-carbonproject';
+  //   await combineSearchingElastic(
+  //     index,
+  //     client,
+  //     'Srepok 1 Solar Power Project',
+  //     'verra',
+  //     'Energy industries (renewable/non-renewable sources)',
+  //     'Viet Nam',
+  //   )
+  // })
+
+  test('test elastic accurate search account success', async () => {
     const client = callElasticSearch()
-    const index = 'objects-carbonproject';
-    await combineSearchingElastic(
-      index,
-      client,
-      'Srepok 1 Solar Power Project',
-      'verra',
-      'Energy industries (renewable/non-renewable sources)',
-      'Viet Nam',
-    )
+    const index = 'objects-account';
+    await keySearch(index, client)
   })
 })
