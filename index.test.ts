@@ -8,6 +8,8 @@ import {
   accurateSearchElastic,
   combineSearchingElastic,
   keySearch,
+  dateRangeSearch,
+  finMultiple,
  } from '.'
 
 describe('main', () => {
@@ -90,9 +92,22 @@ describe('main', () => {
   //   )
   // })
 
-  test('test elastic accurate search account success', async () => {
+  // test('test elastic accurate search account success', async () => {
+  //   const client = callElasticSearch()
+  //   const index = 'objects-account';
+  //   await keySearch(index, client)
+  // })
+
+  test('test date search', async () => {
     const client = callElasticSearch()
-    const index = 'objects-account';
-    await keySearch(index, client)
+    const index = 'objects-carboncredit';
+    await dateRangeSearch(index, client)
   })
+
+  // test('test search multiple value', async () => {
+  //   const client = callElasticSearch()
+  //   // const index = 'objects-carbonproject';
+  //   const index = 'objects-account';
+  //   await finMultiple(index, client)
+  // })
 })

@@ -136,4 +136,58 @@ export const keySearch = async (
   console.log('=====================');
 }
 
+export const dateRangeSearch = async (
+  index: string,
+  client: elasticSearch.Client
+) => {
+  const currentMap = new Map()
+  currentMap.set('gte', '2020-11-01T00:00:00');
+  currentMap.set('lte', '2020-11-02T23:59:59');
+  console.log('=============')
+  console.log(currentMap.size)
+  console.log('=============')
 
+  const result = await client.search({
+    index,
+    query: {
+      range: {
+        vintage_start: Object.fromEntries(currentMap.entries()),
+      }
+    },
+  })
+
+  console.log('===== filter ================');
+  // console.log(result.hits.hits);
+  result.hits.hits.forEach(item => {
+    const jsonResult = JSON.stringify(item, undefined, 2)
+    console.log(jsonResult);
+  })
+
+  console.log('=====================');
+}
+
+export const finMultiple = async (
+  index: string,
+  client: elasticSearch.Client
+) => {
+  const result = await client.search({
+    index,
+    query: {
+      terms: {
+        id: [
+          '1.2.10',
+          '1.2.11',
+        ]
+      },
+    }
+  })
+
+  console.log('===== filter ================');
+  // console.log(result.hits.hits);
+  result.hits.hits.forEach(item => {
+    const jsonResult = JSON.stringify(item, undefined, 2)
+    console.log(jsonResult);
+  })
+
+  console.log('=====================');
+}
