@@ -10,6 +10,8 @@ import {
   keySearch,
   dateRangeSearch,
   finMultiple,
+  searchCount,
+  findAccount,
  } from '.'
 
 describe('main', () => {
@@ -98,11 +100,11 @@ describe('main', () => {
   //   await keySearch(index, client)
   // })
 
-  test('test date search', async () => {
-    const client = callElasticSearch()
-    const index = 'objects-carboncredit';
-    await dateRangeSearch(index, client)
-  })
+  // test('test date search', async () => {
+  //   const client = callElasticSearch()
+  //   const index = 'objects-carboncredit';
+  //   await dateRangeSearch(index, client)
+  // })
 
   // test('test search multiple value', async () => {
   //   const client = callElasticSearch()
@@ -110,4 +112,17 @@ describe('main', () => {
   //   const index = 'objects-account';
   //   await finMultiple(index, client)
   // })
+  //
+  // test('test count', async () => {
+  //   const client = callElasticSearch()
+  //   const index = 'objects-account';
+  //   await searchCount(index, client)
+  // });
+
+  test('findAccount', async () => {
+    const client = callElasticSearch()
+    const index = 'objects-account';
+    await findAccount(index, client)
+  });
+
 })

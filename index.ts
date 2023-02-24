@@ -191,3 +191,41 @@ export const finMultiple = async (
 
   console.log('=====================');
 }
+
+export const searchCount = async (
+  index: string,
+  client: elasticSearch.Client, 
+) => {
+  const { count } = await client.count({
+    index
+  })
+  console.log('===== filter ================');
+  console.log(count);
+  console.log('=====================');
+  client.search
+}
+
+export const findAccount = async (
+  index: string,
+  client: elasticSearch.Client, 
+) => {
+  const result = await client.search({
+    index,
+    query: {
+      match: {
+        name: 'michael-0000'
+      }
+    }
+  })
+
+
+  console.log('===== filter ================');
+  // console.log(result.hits.hits);
+  result.hits.hits.forEach(item => {
+    const jsonResult = JSON.stringify(item, undefined, 2)
+    console.log(jsonResult);
+  })
+
+  console.log('=============================');
+}
+
