@@ -228,4 +228,28 @@ export const findAccount = async (
 
   console.log('=============================');
 }
+export const findAssetWithQuery = async (
+  index: string,
+  client: elasticSearch.Client, 
+) => {
+  const result = await client.search({
+    index,
+    query: {
+      match: {
+        // symbol: 'VCU',
+        symbol: 'ECO2',
+      }
+    }
+  })
+
+
+  console.log('===== filter ================');
+  // console.log(result.hits.hits);
+  result.hits.hits.forEach(item => {
+    const jsonResult = JSON.stringify(item, undefined, 2)
+    console.log(jsonResult);
+  })
+
+  console.log('=============================');
+}
 

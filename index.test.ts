@@ -12,6 +12,7 @@ import {
   finMultiple,
   searchCount,
   findAccount,
+  findAssetWithQuery,
  } from '.'
 
 describe('main', () => {
@@ -119,10 +120,17 @@ describe('main', () => {
   //   await searchCount(index, client)
   // });
 
-  test('findAccount', async () => {
+  // test('findAccount', async () => {
+  //   const client = callElasticSearch()
+  //   const index = 'objects-account';
+  //   await findAccount(index, client)
+  // });
+
+  test('findAssetWithQuery', async () => {
     const client = callElasticSearch()
-    const index = 'objects-account';
-    await findAccount(index, client)
+    const index = 'objects-asset';
+    // const index = 'objects-account';
+    await findAssetWithQuery(index, client)
   });
 
 })
