@@ -1,7 +1,7 @@
 import elasticSearch from '@elastic/elasticsearch'
 
 export const callElasticSearch = () => {
-  const node = 'https://dex.es.dev.net-zero.eco/';
+  const node = 'https://es.dev.dex.net-zero.eco';
   // const node = 'http://localhost:9200'
   const client = new elasticSearch.Client({
     node
@@ -232,23 +232,40 @@ export const findAssetWithQuery = async (
   index: string,
   client: elasticSearch.Client, 
 ) => {
+  const symbolNameList = ['eco2', 'eusd'];
   const result = await client.search({
     index,
     query: {
-      match: {
-        // symbol: 'VCU',
-        symbol: 'ECO2',
+      terms: {
+        symbol: symbolNameList,
       }
-    }
+    },
+    // query: {
+    //   match: {
+    //     // symbol: 'VCU',
+    //     // symbol: 'ECO2',
+    //     symbol: 'EUSD',
+    //   }
+    // }
   })
 
 
   console.log('===== filter ================');
   // console.log(result.hits.hits);
-  result.hits.hits.forEach(item => {
-    const jsonResult = JSON.stringify(item, undefined, 2)
-    console.log(jsonResult);
+  // result.hits.hits.forEach(item => {
+  //   const jsonResult = JSON.stringify(item, undefined, 2)
+  //   console.log(jsonResult);
+  // })
+
+
+  const mainAsset = result.hits.hits.filter((sourceItem) => {
+    const source = sourceItem._source;
+    const symbol = source.symbol as string
+    return symbolNameList.includes(symbol.toLowerCase())
+  }).map((sourceItem) => {
+    return sourceItem._source;
   })
+  console.log(JSON.stringify(mainAsset, undefined, 2));
 
   console.log('=============================');
 }
