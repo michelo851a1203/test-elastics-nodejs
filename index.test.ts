@@ -13,6 +13,7 @@ import {
   searchCount,
   findAccount,
   findAssetWithQuery,
+  findAssetWithQuery_for_carbon_credit,
  } from '.'
 
 describe('main', () => {
@@ -126,11 +127,18 @@ describe('main', () => {
   //   await findAccount(index, client)
   // });
 
-  test('findAssetWithQuery', async () => {
+  // test('findAssetWithQuery', async () => {
+  //   const client = callElasticSearch()
+  //   const index = 'objects-asset';
+  //   // const index = 'objects-account';
+  //   await findAssetWithQuery(index, client)
+  // });
+
+  test('findAssetWithQuery_for_carbon_credit', async () => {
     const client = callElasticSearch()
     const index = 'objects-asset';
     // const index = 'objects-account';
-    await findAssetWithQuery(index, client)
+    await findAssetWithQuery_for_carbon_credit(index, client)
   });
 
 })

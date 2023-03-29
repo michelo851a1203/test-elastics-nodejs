@@ -270,3 +270,26 @@ export const findAssetWithQuery = async (
   console.log('=============================');
 }
 
+export const findAssetWithQuery_for_carbon_credit = async (
+  index: string,
+  client: elasticSearch.Client, 
+) => {
+  const result = await client.search({
+    index,
+    query: {
+      match: {
+        for_carbon_credit: '1.25.0',
+      }
+    },
+  })
+
+
+  console.log('===== filter ================');
+  result.hits.hits.forEach(item => {
+    const jsonResult = JSON.stringify(item, undefined, 2)
+    console.log(jsonResult);
+  })
+  
+  console.log('=============================');
+}
+
