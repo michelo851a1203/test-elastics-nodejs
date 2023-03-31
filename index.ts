@@ -232,7 +232,7 @@ export const findAssetWithQuery = async (
   index: string,
   client: elasticSearch.Client, 
 ) => {
-  const symbolNameList = ['eco2', 'eusd'];
+  const symbolNameList = ['eusd' ];
   const result = await client.search({
     index,
     query: {
@@ -240,32 +240,25 @@ export const findAssetWithQuery = async (
         symbol: symbolNameList,
       }
     },
-    // query: {
-    //   match: {
-    //     // symbol: 'VCU',
-    //     // symbol: 'ECO2',
-    //     symbol: 'EUSD',
-    //   }
-    // }
   })
 
 
   console.log('===== filter ================');
   // console.log(result.hits.hits);
-  // result.hits.hits.forEach(item => {
-  //   const jsonResult = JSON.stringify(item, undefined, 2)
-  //   console.log(jsonResult);
-  // })
-
-
-  const mainAsset = result.hits.hits.filter((sourceItem) => {
-    const source = sourceItem._source;
-    const symbol = source.symbol as string
-    return symbolNameList.includes(symbol.toLowerCase())
-  }).map((sourceItem) => {
-    return sourceItem._source;
+  result.hits.hits.forEach(item => {
+    const jsonResult = JSON.stringify(item, undefined, 2)
+    console.log(jsonResult);
   })
-  console.log(JSON.stringify(mainAsset, undefined, 2));
+
+
+  // const mainAsset = result.hits.hits.filter((sourceItem) => {
+  //   const source = sourceItem._source;
+  //   const symbol = source.symbol as string
+  //   return symbolNameList.includes(symbol.toLowerCase())
+  // }).map((sourceItem) => {
+  //   return sourceItem._source;
+  // })
+  // console.log(JSON.stringify(mainAsset, undefined, 2));
 
   console.log('=============================');
 }
